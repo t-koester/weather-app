@@ -9,7 +9,7 @@ async function fetchWeather(city) {
     throw new Error("Fehler beim Abrufen der Wetterdaten");
   }
   const data = await response.json();
-  return data; // enthält temperature und condition
+  return data; 
 }
 
 searchButton.addEventListener("click", async () => {
