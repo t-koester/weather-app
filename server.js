@@ -1,12 +1,12 @@
 require('dotenv').config({ path: 'apikey.env' });
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');  // falls node <18, sonst built-in
+const fetch = require('node-fetch');  
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors()); // für lokale Entwicklung
+app.use(cors()); 
 
 const apiKey = process.env.API_KEY;
 
@@ -15,7 +15,7 @@ if (!apiKey) {
   process.exit(1);
 }
 
-// Route: wetterdaten per Stadtname abfragen
+
 app.get('/weather', async (req, res) => {
   const city = req.query.city;
   if (!city) {
@@ -23,7 +23,7 @@ app.get('/weather', async (req, res) => {
   }
 
   try {
-    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}&lang=de`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(city)}&lang=en`;
     const response = await fetch(url);
     if (!response.ok) {
       return res.status(response.status).json({ error: "Fehler bei der Wetter-API" });
